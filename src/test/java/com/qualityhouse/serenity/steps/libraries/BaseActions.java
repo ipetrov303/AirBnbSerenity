@@ -1,5 +1,6 @@
 package com.qualityhouse.serenity.steps.libraries;
 
+import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.BasePage;
 import com.qualityhouse.serenity.page_objects.HomePage;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -14,6 +15,7 @@ public class BaseActions {
 
     private HomePage homePage;
     private BasePage currentPage;
+    private VacationDetails vacationDetails;
 
 
     @Step
@@ -38,11 +40,27 @@ public class BaseActions {
                 data);
     }
 
-    protected void selectDate(WebElementFacade webElement,
-                              int plusNumOfDays) {
+    protected void selectStartDate(WebElementFacade webElement)
+    {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + plusNumOfDays));
+        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + vacationDetails.getStartDate() ));
+
+        List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
+
+        for (WebElementFacade option : options) {
+            if (option.getText().equals(currentDate)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    protected void selectEndDate(WebElementFacade webElement)
+    {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + vacationDetails.getStartDate() + vacationDetails.getPeriodLength()));
 
         List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
 
