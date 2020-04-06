@@ -16,15 +16,22 @@ public class HomeActions extends BaseActions {
     }
 
     @Step
+    public void selectsCurrency() {
+        clicksOn(homePage.regionAndCurrencyButton);
+        clicksOn(homePage.currencyLinkText.get(1));
+        clicksOn(homePage.currencyOptions.get(4));
+    }
+
+    @Step
     public void submitVacationDetails(VacationDetails vacationDetails) {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
         selectOptionFromDestinationResults(0);
-        selectStartDate(homePage.checkInDate, vacationDetails.getStartDate());
-        selectEndDate(homePage.checkOutDate, vacationDetails.getStartDate(), vacationDetails.getPeriodLength());
+        selectStartDate(homePage.checkInDate, vacationDetails.getDaysFromNow());
+        selectEndDate(homePage.checkOutDate, (vacationDetails.getDaysFromNow() + vacationDetails.getPeriodLength()));
         clicksOn(homePage.guestsMenu);
         selectAdults(vacationDetails.getAdults());
         selectChildren(vacationDetails.getChildren());
-        clicksOn(homePage.save);
+        clicksOn(homePage.saveLinkText);
         clicksOn(homePage.searchButton);
 
     }
@@ -35,6 +42,7 @@ public class HomeActions extends BaseActions {
             clicksOn(homePage.guestOptions.get(1).find(GUESTS_PLUS_BUTTONS));
         }
     }
+
     @Step
     private void selectAdults(int numberOfAdults) {
         for (int i = 0; i < numberOfAdults; i++) {

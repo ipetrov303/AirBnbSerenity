@@ -4,7 +4,7 @@ public class VacationDetails {
 
     private String destination;
     private String currency;
-    private int startDate;
+    private int daysFromNow;
     private int periodLength;
     private int adults;
     private int children;
@@ -25,12 +25,12 @@ public class VacationDetails {
         this.currency = currency;
     }
 
-    public int getStartDate() {
-        return startDate;
+    public int getDaysFromNow() {
+        return daysFromNow;
     }
 
-    public void setStartDate(int startDate) {
-        this.startDate = startDate;
+    public void setDaysFromNow(int daysFromNow) {
+        this.daysFromNow = daysFromNow;
     }
 
     public int getPeriodLength() {

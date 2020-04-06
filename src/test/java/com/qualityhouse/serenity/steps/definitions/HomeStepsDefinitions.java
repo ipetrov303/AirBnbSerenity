@@ -16,6 +16,7 @@ public class HomeStepsDefinitions {
     @Given("^(?:.*) is on the home page and his region is US$")
     public void isOnTheHomePage() {
         bob.opensHomePage();
+        bob.selectsCurrency();
     }
 
     @When("^he submits a search for the desired destination with his details:$")
@@ -24,6 +25,6 @@ public class HomeStepsDefinitions {
         VacationDetails details = data.get(0);
 
         bob.submitVacationDetails(details);
-        //test
+
     }
 }

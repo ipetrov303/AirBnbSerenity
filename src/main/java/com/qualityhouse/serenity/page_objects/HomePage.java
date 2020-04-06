@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
-@DefaultUrl("https://www.airbnb.com/?_set_bev_on_new_domain=1585921791_MDJiOTdkOWMwOGQz&locale=en")
+@DefaultUrl("https://bg.airbnb.com/")
 public class HomePage extends PageObject {
 
     public static final By DESTINATION_FIELD = By.name("query");
@@ -32,9 +32,18 @@ public class HomePage extends PageObject {
     public WebElementFacade searchButton;
 
     @FindBy(className = "_b0ybw8s")
-    public WebElementFacade save;
+    public WebElementFacade saveLinkText;
 
     @FindBy(className = "_1avdemu")
     public List<WebElementFacade> destinationOptionsDropDown;
+
+    @FindBy(className = "_ojs7nk")
+    public List<WebElementFacade> currencyLinkText;
+
+    @FindBy(className = "_a7a5sx")
+    public List<WebElementFacade> currencyOptions;
+
+    @FindBy(className = "_xpkakx")
+    public WebElementFacade regionAndCurrencyButton;
 }
 
