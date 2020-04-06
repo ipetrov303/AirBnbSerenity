@@ -56,10 +56,10 @@ public class BaseActions {
         }
     }
 
-    protected void selectEndDate(WebElementFacade webElement, int periodLength, int startDate) {
+    protected void selectEndDate(WebElementFacade webElement, int periodLength) {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + startDate + periodLength));
+        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + periodLength));
 
         List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
 
