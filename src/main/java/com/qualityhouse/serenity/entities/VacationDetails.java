@@ -8,7 +8,6 @@ public class VacationDetails {
     private int periodLength;
     private int adults;
     private int children;
-    private int infants;
 
     public String getDestination() {
         return destination;
@@ -58,12 +57,5 @@ public class VacationDetails {
         this.children = children;
     }
 
-    public int getInfants() {
-        return infants;
-    }
-
-    public void setInfants(int infants) {
-        this.infants = infants;
-    }
 
 }
