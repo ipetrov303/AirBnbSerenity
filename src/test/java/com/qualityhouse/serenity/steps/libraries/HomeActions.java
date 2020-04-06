@@ -19,8 +19,8 @@ public class HomeActions extends BaseActions {
     public void submitVacationDetails(VacationDetails vacationDetails) {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
         selectOptionFromDestinationResults(0);
-        selectDate(homePage.checkInDate, 5);
-        selectDate(homePage.checkOutDate, 11);
+        selectStartDate(homePage.checkInDate);
+        selectEndDate(homePage.checkOutDate);
         clicksOn(homePage.guestsMenu);
         selectGuests(0);
         selectGuests(0);
