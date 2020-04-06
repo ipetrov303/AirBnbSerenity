@@ -19,10 +19,9 @@ public class HomeActions extends BaseActions {
     public void submitVacationDetails(VacationDetails vacationDetails) {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
         selectOptionFromDestinationResults(0);
-        selectStartDate(homePage.checkInDate);
-        selectEndDate(homePage.checkOutDate);
+        selectStartDate(homePage.checkInDate, vacationDetails.getStartDate());
+        selectEndDate(homePage.checkOutDate, vacationDetails.getStartDate(), vacationDetails.getPeriodLength());
         clicksOn(homePage.guestsMenu);
-        selectGuests(0);
         selectGuests(0);
         selectGuests(1);
         clicksOn(homePage.save);
@@ -37,7 +36,7 @@ public class HomeActions extends BaseActions {
 
     @Step
     public void selectGuests(int numberAndTypeOfGuests) {
-        clicksOn(homePage.guestOptions.get(numberAndTypeOfGuests).find(GUESTS_PLUS_BUTTONS));
+        clicksOnNumberOfTimes(homePage.guestOptions.get(numberAndTypeOfGuests).find(GUESTS_PLUS_BUTTONS),2,1);
     }
 
 }

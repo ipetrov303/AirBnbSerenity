@@ -13,6 +13,8 @@ import java.util.TimeZone;
 
 public class BaseActions {
 
+    int i;
+
     private HomePage homePage;
     private BasePage currentPage;
     private VacationDetails vacationDetails;
@@ -22,6 +24,22 @@ public class BaseActions {
     protected void clicksOn(WebElementFacade buttonOrLink) {
         buttonOrLink.waitUntilClickable()
                 .click();
+    }
+
+    @Step
+    protected void clicksOnNumberOfTimes(WebElementFacade buttonOrLink, int adults, int children) {
+        for (i = 0; i < adults; i++) {
+            buttonOrLink.waitUntilClickable()
+                    .click();
+        }
+        for (i = 0; i < children; i++) {
+            buttonOrLink.waitUntilClickable()
+                    .click();
+        }
+        for (i = 0; i < vacationDetails.getInfants(); i++) {
+            buttonOrLink.waitUntilClickable()
+                    .click();
+        }
     }
 
     @Step("Enters '{1}' in field {0}")
@@ -40,11 +58,11 @@ public class BaseActions {
                 data);
     }
 
-    protected void selectStartDate(WebElementFacade webElement)
+    protected void selectStartDate(WebElementFacade webElement, int startDate)
     {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + vacationDetails.getStartDate() ));
+        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + startDate ));
 
         List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
 
@@ -56,11 +74,11 @@ public class BaseActions {
         }
     }
 
-    protected void selectEndDate(WebElementFacade webElement)
+    protected void selectEndDate(WebElementFacade webElement, int periodLength, int startDate)
     {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + vacationDetails.getStartDate() + vacationDetails.getPeriodLength()));
+        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + startDate + periodLength));
 
         List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
 
