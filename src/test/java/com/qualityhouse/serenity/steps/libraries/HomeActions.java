@@ -5,7 +5,8 @@ import com.qualityhouse.serenity.page_objects.HomePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 
-import static com.qualityhouse.serenity.page_objects.HomePage.*;
+import static com.qualityhouse.serenity.page_objects.HomePage.DESTINATION_FIELD;
+import static com.qualityhouse.serenity.page_objects.HomePage.DESTINATION_SEARCH_OPTIONS;
 
 public class HomeActions extends BaseActions {
 
@@ -30,8 +31,8 @@ public class HomeActions extends BaseActions {
         selectStartDate(homePage.checkInDate, vacationDetails.getDaysFromNow());
         selectEndDate(homePage.checkOutDate, (vacationDetails.getDaysFromNow() + vacationDetails.getPeriodLength()));
         clicksOn(homePage.guestsMenu);
-        clicksOnIncreaseButton( vacationDetails.getAdults(), homePage.guestOptions.get(0).find(GUESTS_PLUS_BUTTONS));
-        clicksOnIncreaseButton( vacationDetails.getChildren(), homePage.guestOptions.get(1).find(GUESTS_PLUS_BUTTONS));
+        clicksOnIncreaseButton(vacationDetails.getAdults(), homePage.addAdultsButton);
+        clicksOnIncreaseButton(vacationDetails.getChildren(), homePage.addChildrenButton);
         clicksOn(homePage.saveLinkText);
         clicksOn(homePage.searchButton);
 

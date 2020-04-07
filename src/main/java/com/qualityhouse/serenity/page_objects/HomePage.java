@@ -16,10 +16,10 @@ public class HomePage extends PageObject {
     public static final By GUESTS_PLUS_BUTTONS = By.className("_1iz654np");
     public static final By DESTINATION_SEARCH_OPTIONS = By.className("_121z06r2");
 
-    @FindBy(css = "._1lds9wb" )
+    @FindBy(css = "._1lds9wb")
     public WebElementFacade checkInDate;
 
-    @FindBy (css = "._1lds9wb")
+    @FindBy(css = "._1lds9wb")
     public WebElementFacade checkOutDate;
 
     @FindBy(id = "lp-guestpicker")
@@ -45,6 +45,12 @@ public class HomePage extends PageObject {
 
     @FindBy(className = "_xpkakx")
     public WebElementFacade regionAndCurrencyButton;
+
+    @FindBy(css = "[aria-labelledby$='search_bar-adults'] button [aria-label='add']")
+    public WebElementFacade addAdultsButton;
+
+    @FindBy(css = "[aria-labelledby$='search_bar-children'] button [aria-label='add']")
+    public WebElementFacade addChildrenButton;
 
 
     //public WebElementFacade increaseChildrenButton = guestOptions.get(1).find(GUESTS_PLUS_BUTTONS);

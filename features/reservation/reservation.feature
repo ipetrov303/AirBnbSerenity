@@ -6,6 +6,7 @@ Feature: Place Reservation
       | destination | daysFromNow | periodLength | adults | children |
       | Bali        | 5           | 7            | 2      | 1        |
     And he select first five and above star place filtered by:
-      | priceFrom | priceTo | bathrooms |
-      | 50        | 100     | 1         |
+      | priceFrom | priceTo | bathrooms | extras                   |
+      | 50        | 100     | 1         | Air_Conditioner, Hot_Tub |
+
 
