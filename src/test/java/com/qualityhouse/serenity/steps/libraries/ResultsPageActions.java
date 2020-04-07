@@ -4,10 +4,8 @@ import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.ResultsPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.openqa.selenium.By;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.qualityhouse.serenity.page_objects.ResultsPage.*;
@@ -35,13 +33,19 @@ public class ResultsPageActions extends BaseActions {
     public void clicksOnFirstResultWithGradeFiveOrAbove() {
 
         List<WebElementFacade> grades = resultsPage.gradesList;
-        for (WebElementFacade grade : grades) {
-            System.out.println(grade.getText());
-            if (grade.getText().equals("5.0")){
-                grade.waitUntilClickable().click();
+        for (int i = 0; i < grades.size(); i++) {
+            /*if (Double.parseDouble(grades.get(i).getText()) >= 5) {
+                System.out.println(Double.parseDouble(grades.get(i).getText()));
+                resultsPage.itemsList.get(i).click();
+                System.out.println();
                 break;
+            }*/
+
+            if ( Double.parseDouble(grades.get(i).getText()) >= 5) {
+                System.out.println();
+                resultsPage.itemsList.get(i + 1).click();
+                System.out.println();
             }
         }
     }
-
 }
