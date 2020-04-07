@@ -24,6 +24,12 @@ public class BaseActions {
                 .click();
     }
 
+    @Step
+    public void clicksOn(final By locator) {
+        currentPage.find(locator)
+                .waitUntilClickable()
+                .click();
+    }
 
     @Step("Enters '{1}' in field {0}")
     protected void fillsFieldWithData(WebElementFacade fieldElement,
@@ -68,6 +74,13 @@ public class BaseActions {
                 option.click();
                 break;
             }
+        }
+    }
+
+    @Step
+    protected void clicksOnIncreaseButton(int numbersOfClicks, WebElementFacade plusButton) {
+        for (int i = 0; i < numbersOfClicks; i++) {
+            clicksOn(plusButton);
         }
     }
 

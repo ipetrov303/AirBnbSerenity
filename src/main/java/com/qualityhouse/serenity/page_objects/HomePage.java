@@ -45,5 +45,10 @@ public class HomePage extends PageObject {
 
     @FindBy(className = "_xpkakx")
     public WebElementFacade regionAndCurrencyButton;
+
+
+    //public WebElementFacade increaseChildrenButton = guestOptions.get(1).find(GUESTS_PLUS_BUTTONS);
+    //public WebElementFacade increaseAdultsButton = guestOptions.get(0).find(GUESTS_PLUS_BUTTONS);
+
 }
 

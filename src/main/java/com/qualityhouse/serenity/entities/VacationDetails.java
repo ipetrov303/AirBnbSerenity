@@ -8,6 +8,35 @@ public class VacationDetails {
     private int periodLength;
     private int adults;
     private int children;
+    private String priceFrom;
+    private String priceTo;
+    private int bathrooms;
+
+
+    public String getPriceFrom() {
+        return priceFrom;
+    }
+
+    public void setPriceFrom(String priceFrom) {
+        this.priceFrom = priceFrom;
+    }
+
+    public String getPriceTo() {
+        return priceTo;
+    }
+
+    public void setPriceTo(String priceTo) {
+        this.priceTo = priceTo;
+    }
+
+
+    public int getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms = bathrooms;
+    }
 
     public String getDestination() {
         return destination;

@@ -2,6 +2,7 @@ package com.qualityhouse.serenity.steps.libraries;
 
 import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.HomePage;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 
 import static com.qualityhouse.serenity.page_objects.HomePage.*;
@@ -29,29 +30,16 @@ public class HomeActions extends BaseActions {
         selectStartDate(homePage.checkInDate, vacationDetails.getDaysFromNow());
         selectEndDate(homePage.checkOutDate, (vacationDetails.getDaysFromNow() + vacationDetails.getPeriodLength()));
         clicksOn(homePage.guestsMenu);
-        selectAdults(vacationDetails.getAdults());
-        selectChildren(vacationDetails.getChildren());
+        clicksOnIncreaseButton( vacationDetails.getAdults(), homePage.guestOptions.get(0).find(GUESTS_PLUS_BUTTONS));
+        clicksOnIncreaseButton( vacationDetails.getChildren(), homePage.guestOptions.get(1).find(GUESTS_PLUS_BUTTONS));
         clicksOn(homePage.saveLinkText);
         clicksOn(homePage.searchButton);
 
     }
 
-    @Step
-    private void selectChildren(int numberOfChildren) {
-        for (int i = 0; i < numberOfChildren; i++) {
-            clicksOn(homePage.guestOptions.get(1).find(GUESTS_PLUS_BUTTONS));
-        }
-    }
 
     @Step
-    private void selectAdults(int numberOfAdults) {
-        for (int i = 0; i < numberOfAdults; i++) {
-            clicksOn(homePage.guestOptions.get(0).find(GUESTS_PLUS_BUTTONS));
-        }
-    }
-
-    @Step
-    public void selectOptionFromDestinationResults(int searchResults) {
-        clicksOn(homePage.destinationOptionsDropDown.get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
+    private void selectOptionFromDestinationResults(int searchResults) {
+        clicksOn((WebElementFacade) homePage.destinationOptionsDropDown.get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
     }
 }
