@@ -3,6 +3,7 @@ package com.qualityhouse.serenity.steps.libraries;
 import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.BasePage;
 import com.qualityhouse.serenity.page_objects.HomePage;
+import com.qualityhouse.serenity.page_objects.utils.ExtrasEnum;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
@@ -20,7 +21,8 @@ public class BaseActions {
 
     @Step
     protected void clicksOn(WebElementFacade buttonOrLink) {
-        buttonOrLink.waitUntilClickable()
+        buttonOrLink
+                .waitUntilClickable()
                 .click();
     }
 
@@ -80,8 +82,15 @@ public class BaseActions {
     @Step
     protected void clicksOnIncreaseButton(int numbersOfClicks, WebElementFacade plusButton) {
         for (int i = 0; i < numbersOfClicks; i++) {
-            clicksOn(plusButton);
+            plusButton.waitUntilClickable()
+                    .click();
         }
     }
 
+    @Step
+    protected void clicksMultipleOptions(List<String> listOfExtras) {
+        for (String extra : listOfExtras) {
+            clicksOn(By.cssSelector(ExtrasEnum.valueOf(extra.toUpperCase()).getValue()));
+        }
+    }
 }

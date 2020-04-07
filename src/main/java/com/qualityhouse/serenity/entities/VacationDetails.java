@@ -1,5 +1,8 @@
 package com.qualityhouse.serenity.entities;
 
+import java.util.List;
+import java.util.Map;
+
 public class VacationDetails {
 
     private String destination;
@@ -11,6 +14,7 @@ public class VacationDetails {
     private String priceFrom;
     private String priceTo;
     private int bathrooms;
+    private String extras;
 
 
     public String getPriceFrom() {
@@ -28,7 +32,6 @@ public class VacationDetails {
     public void setPriceTo(String priceTo) {
         this.priceTo = priceTo;
     }
-
 
     public int getBathrooms() {
         return bathrooms;
@@ -86,5 +89,11 @@ public class VacationDetails {
         this.children = children;
     }
 
+    public String getExtras() {
+        return extras;
+    }
 
+    public void setExtras(String extras) {
+        this.extras = extras;
+    }
 }
