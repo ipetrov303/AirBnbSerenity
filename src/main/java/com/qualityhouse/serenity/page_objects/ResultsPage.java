@@ -13,9 +13,18 @@ public class ResultsPage extends BasePage {
     public static final By MINIMAL_PRICE_FIELD_LOCATOR = By.id("price_filter_min");
     public static final By MAXIMAL_PRICE_FIELD_LOCATOR = By.id("price_filter_max");
     public static final By PRICE_FILTER_SAVE_BUTTON = By.id("filter-panel-save-button");
+    public static final By GRADE_LOCATOR = By.className("_60hvkx2");
 
 
     @FindBy(css = "[id='filterItem-stepper-min_bathrooms-0'] [aria-label='увеличаване на стойността']")
     public WebElementFacade addBathroomButton;
 
+    @FindBy(className = "_2i58o3a")
+    public WebElementFacade submitFiltersButton;
+
+    @FindBy(css = "span._3zgr580")
+    public List<WebElementFacade> gradesList;
+
+    @FindBy(className = "_4ntfzh")
+    public List<WebElementFacade> gradesList1;
 }
