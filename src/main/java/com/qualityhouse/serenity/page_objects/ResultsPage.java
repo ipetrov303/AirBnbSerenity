@@ -25,6 +25,6 @@ public class ResultsPage extends BasePage {
     @FindBy(css = "span._3zgr580")
     public List<WebElementFacade> gradesList;
 
-    @FindBy(className = "_4ntfzh")
-    public List<WebElementFacade> gradesList1;
+    @FindBy(className = "_8ssblpx")
+    public List<WebElementFacade> itemsList;
 }
