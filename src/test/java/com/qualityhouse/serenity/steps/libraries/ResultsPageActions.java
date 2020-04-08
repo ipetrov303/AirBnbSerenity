@@ -34,17 +34,8 @@ public class ResultsPageActions extends BaseActions {
 
         List<WebElementFacade> grades = resultsPage.gradesList;
         for (int i = 0; i < grades.size(); i++) {
-            /*if (Double.parseDouble(grades.get(i).getText()) >= 5) {
-                System.out.println(Double.parseDouble(grades.get(i).getText()));
-                resultsPage.itemsList.get(i).click();
-                System.out.println();
-                break;
-            }*/
-
             if ( Double.parseDouble(grades.get(i).getText()) >= 5) {
-                System.out.println();
                 resultsPage.itemsList.get(i + 1).click();
-                System.out.println();
             }
         }
     }
