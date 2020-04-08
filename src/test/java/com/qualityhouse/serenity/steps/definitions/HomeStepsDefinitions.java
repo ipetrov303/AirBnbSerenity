@@ -13,7 +13,7 @@ public class HomeStepsDefinitions {
     @Steps
     private HomeActions bob;
 
-    @Given("^(?:.*) is on the home page and his region is US$")
+    @Given("^(?:.*) is on the home page and chooses Euro as his currency$")
     public void isOnTheHomePage() {
         bob.opensHomePage();
         bob.selectsCurrency();

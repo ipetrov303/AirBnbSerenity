@@ -4,19 +4,28 @@ import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.BasePage;
 import com.qualityhouse.serenity.page_objects.HomePage;
 import com.qualityhouse.serenity.page_objects.utils.ExtrasEnum;
+import cucumber.api.java.eo.Se;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.yecht.Data;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
 
 public class BaseActions {
 
     private HomePage homePage;
     private BasePage currentPage;
     private VacationDetails vacationDetails;
+    private String mainWindow;
 
 
     @Step
@@ -92,5 +101,71 @@ public class BaseActions {
         for (String extra : listOfExtras) {
             clicksOn(By.cssSelector(ExtrasEnum.valueOf(extra.toUpperCase()).getValue()));
         }
+    }
+
+    @Step
+    public String readsTextFrom(WebElementFacade webElement) {
+        return webElement.waitUntilVisible()
+                .getText()
+                .trim();
+    }
+
+    @Step
+    public String readsTextFrom(By locator) {
+        return readsTextFrom((WebElementFacade) currentPage.find(locator));
+    }
+
+    @Step
+    public String readsValue(WebElementFacade webElement) {
+
+        return webElement.waitUntilVisible().getAttribute("value");
+    }
+
+    @Step
+    public void switchToNewTab(int tabIndex) {
+
+        this.mainWindow = currentPage.getDriver()
+                .getWindowHandle();
+
+        Set<String> windowsHandles = currentPage.getDriver()
+                .getWindowHandles();
+        if (windowsHandles == null || windowsHandles.size() < tabIndex + 1) {
+            throw new RuntimeException("Cannot switch to tab because there aren't any!");
+        }
+
+        Iterator<String> iterate = windowsHandles.iterator();
+        String tabToSwitch = null;
+
+        for (int i = 0; i <= tabIndex; i++) {
+            tabToSwitch = iterate.next();
+        }
+
+        if (tabToSwitch == null) {
+            throw new RuntimeException("Unable to find tab to switch to!");
+        }
+
+        currentPage.getDriver().switchTo().window(tabToSwitch);
+    }
+
+    @Step
+    public double readsDoubleFrom(By locator) {
+        String numericText = readsTextFrom((WebElementFacade) currentPage.find(locator));
+        NumberFormat number = NumberFormat.getCurrencyInstance(Locale.GERMANY);
+
+        try {
+            return number.parse(numericText).doubleValue();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Can't convert " + numericText + " to Double!");
+        }
+    }
+    @Step
+    public int readsPrice(By locator) {
+        return Integer.parseInt(readsTextFrom(locator).substring(1));
+    }
+
+    @Step
+    public int readsPrice(WebElementFacade webElement) {
+        return Integer.parseInt(readsTextFrom(webElement).substring(1));
     }
 }

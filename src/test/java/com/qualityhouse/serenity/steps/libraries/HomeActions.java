@@ -43,4 +43,6 @@ public class HomeActions extends BaseActions {
     private void selectOptionFromDestinationResults(int searchResults) {
         clicksOn((WebElementFacade) homePage.destinationOptionsDropDown.get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
     }
+
+
 }
