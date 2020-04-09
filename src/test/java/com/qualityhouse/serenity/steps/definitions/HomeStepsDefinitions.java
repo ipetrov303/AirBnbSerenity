@@ -16,7 +16,7 @@ public class HomeStepsDefinitions {
     @Given("^(?:.*) is on the home page and chooses Euro as his currency$")
     public void isOnTheHomePage() {
         bob.opensHomePage();
-       // bob.selectsCurrency();
+        bob.selectsCurrency();
     }
 
     @When("^he submits a search for the desired destination with his details:$")

@@ -4,17 +4,10 @@ import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.BasePage;
 import com.qualityhouse.serenity.page_objects.HomePage;
 import com.qualityhouse.serenity.page_objects.utils.ExtrasEnum;
-import cucumber.api.java.eo.Se;
-import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.yecht.Data;
+
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -137,12 +130,6 @@ public class BaseActions {
     }
 
     @Step
-    public String readsValue(WebElementFacade webElement) {
-
-        return webElement.waitUntilVisible().getAttribute("value");
-    }
-
-    @Step
     public void switchToNewTab(int tabIndex) {
 
         this.mainWindow = currentPage.getDriver()
@@ -180,6 +167,7 @@ public class BaseActions {
             throw new RuntimeException("Can't convert " + numericText + " to Double!");
         }
     }
+
     @Step
     public int readsPrice(By locator) {
         return Integer.parseInt(readsTextFrom(locator).substring(1));

@@ -13,5 +13,4 @@ public class ReservationDetailsPage extends PageObject{
 
     @FindBy(className = "_doc79r")
     public WebElementFacade dailyPrice;
-
 }
