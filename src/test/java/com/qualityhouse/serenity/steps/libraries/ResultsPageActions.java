@@ -5,9 +5,7 @@ import com.qualityhouse.serenity.page_objects.ResultsPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.qualityhouse.serenity.page_objects.ResultsPage.*;
 
@@ -32,19 +30,12 @@ public class ResultsPageActions extends BaseActions {
     @Step
     public void clicksOnFirstResultWithGradeFiveOrAbove() {
 
-        List<WebElementFacade> grades = resultsPage.gradesList;
-        List<WebElementFacade> temp = new ArrayList<>();
         for (WebElementFacade webElementFacade : resultsPage.itemsList) {
-            if (webElementFacade.containsElements(GRADE_LOCATOR)) {
-                temp.add(webElementFacade);
-            }
-        }
-        for (int i = 0; i < grades.size(); i++) {
-            if (Double.parseDouble(grades.get(i).getText()) >= 5) {
-                temp.get(i).click();
+            if (webElementFacade.containsElements(GRADE_LOCATOR) &&
+                    Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= 5.00) {
+                clicksOn(webElementFacade);
                 break;
             }
         }
     }
-
 }
