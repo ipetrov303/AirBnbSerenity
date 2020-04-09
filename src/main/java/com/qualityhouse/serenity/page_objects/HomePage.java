@@ -26,7 +26,7 @@ public class HomePage extends PageObject {
     @FindBy(className = "_1a72ixey")
     public List<WebElementFacade> guestOptions;
 
-    @FindBy(className = "_1vs0x720")
+    @FindBy(className = "_h6px0p")
     public WebElementFacade searchButton;
 
     @FindBy(className = "_b0ybw8s")
@@ -45,10 +45,10 @@ public class HomePage extends PageObject {
     public WebElementFacade regionAndCurrencyButton;
 
     //TODO
-    @FindBy(css = "[aria-labelledby$='searchFlow-title-label-stepper-adults'] button [aria-label='увеличаване на стойността']")
+    @FindBy(css = "[aria-labelledby$='searchFlow-title-label-stepper-adults'] [aria-label='увеличаване на стойността']")
     public WebElementFacade addAdultsButton;
 
-    @FindBy(css = "[aria-labelledby$='search_bar-children'] button [aria-label='add']")
+    @FindBy(css = "[aria-describedby='searchFlow-subtitle-label-stepper-children'] [aria-label='увеличаване на стойността']")
     public WebElementFacade addChildrenButton;
 
     @FindBy(css = "[aria-label='Напред']")

@@ -34,7 +34,6 @@ public class HomeActions extends BaseActions {
         clicksOn(homePage.searchBarList.get(2));
         clicksOnIncreaseButton(vacationDetails.getAdults(), homePage.addAdultsButton);
         clicksOnIncreaseButton(vacationDetails.getChildren(), homePage.addChildrenButton);
-        clicksOn(homePage.saveLinkText);
         clicksOn(homePage.searchButton);
 
     }
