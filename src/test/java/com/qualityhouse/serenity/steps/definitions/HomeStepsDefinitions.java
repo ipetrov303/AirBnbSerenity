@@ -16,11 +16,11 @@ public class HomeStepsDefinitions {
     @Given("^(?:.*) is on the home page and his region is US$")
     public void isOnTheHomePage() {
         bob.opensHomePage();
-        bob.selectsCurrency();
+       // bob.selectsCurrency();
     }
 
     @When("^he submits a search for the desired destination with his details:$")
-    public void heSubmitsASearchForTheDesiredDestinationWithHisDetails(List<VacationDetails> data) {
+    public void heSubmitsASearchForTheDesiredDestinationWithHisDetails(List<VacationDetails> data) throws InterruptedException {
 
         VacationDetails details = data.get(0);
 

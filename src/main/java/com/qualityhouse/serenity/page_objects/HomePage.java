@@ -14,16 +14,14 @@ public class HomePage extends PageObject {
 
     public static final By DESTINATION_FIELD = By.name("query");
     public static final By GUESTS_PLUS_BUTTONS = By.className("_1iz654np");
-    public static final By DESTINATION_SEARCH_OPTIONS = By.className("_121z06r2");
+    public static final By DESTINATION_SEARCH_OPTIONS = By.id("Koan-query__option-0");
+    //public static final By CALENDAR_LOCATOR = By.cssSelector("._1w7uj89a");
 
     @FindBy(css = "._1lds9wb")
-    public WebElementFacade checkInDate;
+    public List<WebElementFacade> checkOutDate;
 
-    @FindBy(css = "._1lds9wb")
-    public WebElementFacade checkOutDate;
-
-    @FindBy(id = "lp-guestpicker")
-    public WebElementFacade guestsMenu;
+    @FindBy(className = "_2gf2wq")
+    public List<WebElementFacade> searchBarList;
 
     @FindBy(className = "_1a72ixey")
     public List<WebElementFacade> guestOptions;
@@ -34,7 +32,7 @@ public class HomePage extends PageObject {
     @FindBy(className = "_b0ybw8s")
     public WebElementFacade saveLinkText;
 
-    @FindBy(className = "_1avdemu")
+    @FindBy(id = "Koan-query__listbox")
     public List<WebElementFacade> destinationOptionsDropDown;
 
     @FindBy(className = "_ojs7nk")
@@ -46,12 +44,15 @@ public class HomePage extends PageObject {
     @FindBy(className = "_xpkakx")
     public WebElementFacade regionAndCurrencyButton;
 
-    @FindBy(css = "[aria-labelledby$='search_bar-adults'] button [aria-label='add']")
+    //TODO
+    @FindBy(css = "[aria-labelledby$='searchFlow-title-label-stepper-adults'] button [aria-label='увеличаване на стойността']")
     public WebElementFacade addAdultsButton;
 
     @FindBy(css = "[aria-labelledby$='search_bar-children'] button [aria-label='add']")
     public WebElementFacade addChildrenButton;
 
+    @FindBy(css = "[aria-label='Напред']")
+    public WebElementFacade monthRightArrow;
 
     //public WebElementFacade increaseChildrenButton = guestOptions.get(1).find(GUESTS_PLUS_BUTTONS);
     //public WebElementFacade increaseAdultsButton = guestOptions.get(0).find(GUESTS_PLUS_BUTTONS);
