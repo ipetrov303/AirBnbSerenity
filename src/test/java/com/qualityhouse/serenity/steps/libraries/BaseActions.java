@@ -27,7 +27,6 @@ public class BaseActions {
     private VacationDetails vacationDetails;
     private String mainWindow;
 
-
     @Step
     protected void clicksOn(WebElementFacade buttonOrLink) {
         buttonOrLink
@@ -58,35 +57,57 @@ public class BaseActions {
                 data);
     }
 
-    protected void selectStartDate(WebElementFacade webElement, int startDate) {
+    protected void selectCheckInDate(int daysFromNow) {
+
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int currentMonthNow = calendar.get(Calendar.MONTH);
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + startDate));
+        calendar.add(Calendar.DAY_OF_MONTH, daysFromNow);
 
-        List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
+        int numberOfClicks = calendar.get(Calendar.MONTH) - currentMonthNow;
+
+        if (numberOfClicks != 0) {
+            for (int i = 0; i < numberOfClicks; i++) {
+                clicksOn(homePage.monthRightArrow);
+            }
+        }
+
+        List<WebElementFacade> options = homePage.checkOutDate.get(0).thenFindAll(By.tagName("td"));
 
         for (WebElementFacade option : options) {
-            if (option.getText().equals(currentDate)) {
+            if (option.getText().equals(calendar.get(Calendar.DAY_OF_MONTH) + "")) {
                 option.click();
                 break;
             }
         }
     }
 
-    protected void selectEndDate(WebElementFacade webElement, int periodLength) {
+    protected void selectCheckOutDate(int daysFromNow, int vacationLength) {
+
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        calendar.add(Calendar.DAY_OF_MONTH, daysFromNow);
 
-        String currentDate = Integer.toString((calendar.get(Calendar.DATE) + periodLength));
+        int monthFromReservation = calendar.get(Calendar.MONTH);
+        calendar.add(Calendar.DAY_OF_MONTH, vacationLength);
 
-        List<WebElementFacade> options = webElement.thenFindAll(By.tagName("td"));
+        int numberOfClicks = calendar.get(Calendar.MONTH) - monthFromReservation;
+
+        if (numberOfClicks != 0) {
+            for (int i = 0; i < numberOfClicks; i++) {
+                clicksOn(homePage.monthRightArrow);
+            }
+        }
+
+        List<WebElementFacade> options = homePage.checkOutDate.get(0).thenFindAll(By.tagName("td"));
 
         for (WebElementFacade option : options) {
-            if (option.getText().equals(currentDate)) {
+            if (option.getText().equals(calendar.get(Calendar.DAY_OF_MONTH) + "")) {
                 option.click();
                 break;
             }
         }
     }
+
 
     @Step
     protected void clicksOnIncreaseButton(int numbersOfClicks, WebElementFacade plusButton) {

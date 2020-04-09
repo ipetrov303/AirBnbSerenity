@@ -11,7 +11,7 @@ import static com.qualityhouse.serenity.page_objects.HomePage.DESTINATION_SEARCH
 public class HomeActions extends BaseActions {
 
     private HomePage homePage;
-
+    String string = "String";
     @Step
     public void opensHomePage() {
         homePage.open();
@@ -25,12 +25,13 @@ public class HomeActions extends BaseActions {
     }
 
     @Step
-    public void submitVacationDetails(VacationDetails vacationDetails) {
+    public void submitVacationDetails(VacationDetails vacationDetails) throws InterruptedException {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
+        Thread.sleep(1000);
         selectOptionFromDestinationResults(0);
-        selectStartDate(homePage.checkInDate, vacationDetails.getDaysFromNow());
-        selectEndDate(homePage.checkOutDate, (vacationDetails.getDaysFromNow() + vacationDetails.getPeriodLength()));
-        clicksOn(homePage.guestsMenu);
+        selectCheckInDate(vacationDetails.getDaysFromNow());
+        selectCheckOutDate(vacationDetails.getDaysFromNow(), vacationDetails.getPeriodLength());
+        clicksOn(homePage.searchBarList.get(2));
         clicksOnIncreaseButton(vacationDetails.getAdults(), homePage.addAdultsButton);
         clicksOnIncreaseButton(vacationDetails.getChildren(), homePage.addChildrenButton);
         clicksOn(homePage.saveLinkText);
@@ -41,7 +42,8 @@ public class HomeActions extends BaseActions {
 
     @Step
     private void selectOptionFromDestinationResults(int searchResults) {
-        clicksOn((WebElementFacade) homePage.destinationOptionsDropDown.get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
+        clicksOn((WebElementFacade) homePage.destinationOptionsDropDown
+                .get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
     }
 
 
