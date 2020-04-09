@@ -23,5 +23,7 @@ public class ResultsPageStepsDefinitions {
         Thread.sleep(2000);
         bob.clicksOnFirstResultWithGradeFiveOrAbove();
         Thread.sleep(2000);
+        bob.switchToNewTab(1);
+
     }
 }
