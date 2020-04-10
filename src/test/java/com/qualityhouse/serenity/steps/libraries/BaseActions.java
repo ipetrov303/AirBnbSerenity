@@ -177,4 +177,9 @@ public class BaseActions {
     public int readsPrice(WebElementFacade webElement) {
         return Integer.parseInt(readsTextFrom(webElement).substring(1));
     }
+
+    @Step
+    public int readsNumberOfPeopleAsInteger(By locator) {
+        return Integer.parseInt(readsTextFrom(locator).substring(0,1));
+    }
 }

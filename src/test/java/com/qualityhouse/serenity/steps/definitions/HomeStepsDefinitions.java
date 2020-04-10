@@ -8,6 +8,8 @@ import net.thucydides.core.annotations.Steps;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class HomeStepsDefinitions {
 
     @Steps
@@ -23,6 +25,8 @@ public class HomeStepsDefinitions {
     public void heSubmitsASearchForTheDesiredDestinationWithHisDetails(List<VacationDetails> data) throws InterruptedException {
 
         VacationDetails details = data.get(0);
+
+
 
         bob.submitVacationDetails(details);
 
