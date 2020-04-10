@@ -20,11 +20,10 @@ public class ResultsPageStepsDefinitions {
         VacationDetails details = data.get(0);
 
         bob.selectFilters(details);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         bob.clicksOnFirstResultWithGradeFiveOrAbove();
-        Thread.sleep(2000);
         bob.switchToNewTab(1);
-        Thread.sleep(5000);
+
 
     }
 }

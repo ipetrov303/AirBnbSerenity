@@ -6,9 +6,8 @@ import cucumber.api.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 
-import java.util.NoSuchElementException;
-
 import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReservationDetailsStepsDefinitions {
 
@@ -22,31 +21,34 @@ public class ReservationDetailsStepsDefinitions {
         int dailyPrice = 0;
         int taxForService = 0;
         int finalPrice = 0;
+        int numberOfPeople = 0;
 
         try {
            dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY);
            taxForService = bob.readsPrice(TAX_FOR_SERVICE);
            finalPrice = bob.readsPrice(TOTAL_PRICE);
-        }catch (NoSuchElementException exception ) {
+           numberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
 
-            System.out.println("Next locators batch:");
-        }
-
-        if(dailyPrice == 0 ) {
-            try {
+            if(dailyPrice == 0 ) {
                 dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY1);
                 taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
                 finalPrice = bob.readsPrice(TOTAL_PRICE1);
-            } catch (NoSuchElementException exception) {
-                System.out.println(exception.getMessage());
+                numberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
             }
+
+        }catch (RuntimeException exception ) {
+            System.out.println(exception.getMessage());
         }
+
+
 
         SoftAssertions softly = new SoftAssertions();
 
-        int expectedTotalPrice = dailyPrice * 3 + taxForService;
+        int expectedTotalPrice = (dailyPrice * numberOfPeople) + taxForService;
 
-        softly.assertThat(finalPrice).isEqualTo(expectedTotalPrice);
+        softly.assertThat(finalPrice).as("dawdwa").isEqualTo(expectedTotalPrice);
+
+        softly.assertAll();
        // System.out.println(bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY));
         //System.out.println(bob.readsPrice(TOTAL_PRICE));
     }
