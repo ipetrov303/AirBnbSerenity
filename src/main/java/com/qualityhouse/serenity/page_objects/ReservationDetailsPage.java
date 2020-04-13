@@ -5,7 +5,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 
-public class ReservationDetailsPage extends PageObject{
+public class ReservationDetailsPage extends PageObject {
 
     public static final By DAILY_PRICE_FOR_ONE_DAY = By.cssSelector("[class='_1p0spma2'] [class='_doc79r']");
     public static final By TAX_FOR_SERVICE = By.cssSelector("#book_it_form > div:nth-child(3) > div:nth-child(3) > div._hgs47m > div._ni9axhe > span > span");
@@ -20,6 +20,9 @@ public class ReservationDetailsPage extends PageObject{
 
     public static final By NUMBER_OF_DAYS = By.cssSelector("[class='_10ejfg4u'] [class='_1jlnvra2'] span");
 
+    @FindBy(css = "[class='_hgs47m'] [class='_1jlnvra2'] span")
+    public WebElementFacade priceMultiplyNightsText;
 
-
+    @FindBy(css = "[class='_15osndh6'] div")
+    public WebElementFacade weeklyDiscountField;
 }
