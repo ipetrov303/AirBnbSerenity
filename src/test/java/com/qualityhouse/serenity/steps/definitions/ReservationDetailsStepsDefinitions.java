@@ -7,7 +7,6 @@ import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 
 import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReservationDetailsStepsDefinitions {
 
@@ -24,37 +23,36 @@ public class ReservationDetailsStepsDefinitions {
         int actualNumberOfPeople = 0;
 
         try {
-           dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY);
-           taxForService = bob.readsPrice(TAX_FOR_SERVICE);
-           finalPrice = bob.readsPrice(TOTAL_PRICE);
-           actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
+            dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY);
+            taxForService = bob.readsPrice(TAX_FOR_SERVICE);
+            finalPrice = bob.readsPrice(TOTAL_PRICE);
+            actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
 
-            if(dailyPrice == 0 ) {
+            if (dailyPrice == 0) {
                 dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY1);
                 taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
                 finalPrice = bob.readsPrice(TOTAL_PRICE1);
                 actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
             }
 
-        }catch (RuntimeException exception ) {
+        } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
         }
 
 
-
         SoftAssertions softly = new SoftAssertions();
 
-        int expectedTotalPrice = (dailyPrice * actualNumberOfPeople) + taxForService;
+        int expectedTotalPrice = (dailyPrice * HomeStepsDefinitions.vacationDetails.getPeriodLength()) + taxForService;
         int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
                 + HomeStepsDefinitions.vacationDetails.getChildren();
 
         softly.assertThat(actualNumberOfPeople)
-                .as("Number of guests displayed correctly")
+                .as("Number of guests displayed correctly: ")
                 .isEqualTo(expectedNumberOfGuests);
-        softly.assertThat(finalPrice).as("dawdwa").isEqualTo(expectedTotalPrice);
+
+        softly.assertThat(finalPrice).as("Final price should be calculated correctly: ")
+                .isEqualTo(expectedTotalPrice);
 
         softly.assertAll();
-       // System.out.println(bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY));
-        //System.out.println(bob.readsPrice(TOTAL_PRICE));
     }
 }
