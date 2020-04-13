@@ -24,4 +24,8 @@ public class ResultsPage extends BasePage {
 
     @FindBy(className = "_8ssblpx")
     public List<WebElementFacade> itemsList;
+
+    @FindBy(className = "_i66xk8d")
+    public WebElementFacade nextPageArrowButton;
+
 }

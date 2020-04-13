@@ -1,6 +1,7 @@
 package com.qualityhouse.serenity.steps.definitions;
 
 import com.qualityhouse.serenity.entities.VacationDetails;
+import com.qualityhouse.serenity.entities.VacationFilters;
 import com.qualityhouse.serenity.page_objects.ResultsPage;
 import com.qualityhouse.serenity.steps.libraries.ResultsPageActions;
 import cucumber.api.java.en.And;
@@ -15,15 +16,13 @@ public class ResultsPageStepsDefinitions {
     private ResultsPage resultsPage;
 
     @And("^he select first five and above star place filtered by:$")
-    public void submitsLodgingPreferences(List<VacationDetails> data) throws InterruptedException {
+    public void submitsLodgingPreferences(List<VacationFilters> data) throws InterruptedException {
 
-        VacationDetails details = data.get(0);
+        VacationFilters vacationFilters = data.get(0);
 
-        bob.selectFilters(details);
+        bob.selectFilters(vacationFilters);
         Thread.sleep(1000);
         bob.clicksOnFirstResultWithGradeFiveOrAbove();
         bob.switchToNewTab(1);
-
-
     }
 }

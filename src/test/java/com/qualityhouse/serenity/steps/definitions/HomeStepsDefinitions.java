@@ -11,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomeStepsDefinitions {
-
+    static VacationDetails vacationDetails;
     @Steps
     private HomeActions bob;
 
@@ -24,11 +24,7 @@ public class HomeStepsDefinitions {
     @When("^he submits a search for the desired destination with his details:$")
     public void heSubmitsASearchForTheDesiredDestinationWithHisDetails(List<VacationDetails> data) throws InterruptedException {
 
-        VacationDetails details = data.get(0);
-
-
-
-        bob.submitVacationDetails(details);
-
+        vacationDetails = data.get(0);
+        bob.submitVacationDetails(vacationDetails);
     }
 }

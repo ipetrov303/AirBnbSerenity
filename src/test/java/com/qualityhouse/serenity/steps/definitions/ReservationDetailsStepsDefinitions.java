@@ -21,19 +21,19 @@ public class ReservationDetailsStepsDefinitions {
         int dailyPrice = 0;
         int taxForService = 0;
         int finalPrice = 0;
-        int numberOfPeople = 0;
+        int actualNumberOfPeople = 0;
 
         try {
            dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY);
            taxForService = bob.readsPrice(TAX_FOR_SERVICE);
            finalPrice = bob.readsPrice(TOTAL_PRICE);
-           numberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
+           actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
 
             if(dailyPrice == 0 ) {
                 dailyPrice = bob.readsPrice(DAILY_PRICE_FOR_ONE_DAY1);
                 taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
                 finalPrice = bob.readsPrice(TOTAL_PRICE1);
-                numberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
+                actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
             }
 
         }catch (RuntimeException exception ) {
@@ -44,8 +44,13 @@ public class ReservationDetailsStepsDefinitions {
 
         SoftAssertions softly = new SoftAssertions();
 
-        int expectedTotalPrice = (dailyPrice * numberOfPeople) + taxForService;
+        int expectedTotalPrice = (dailyPrice * actualNumberOfPeople) + taxForService;
+        int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
+                + HomeStepsDefinitions.vacationDetails.getChildren();
 
+        softly.assertThat(actualNumberOfPeople)
+                .as("Number of guests displayed correctly")
+                .isEqualTo(expectedNumberOfGuests);
         softly.assertThat(finalPrice).as("dawdwa").isEqualTo(expectedTotalPrice);
 
         softly.assertAll();
