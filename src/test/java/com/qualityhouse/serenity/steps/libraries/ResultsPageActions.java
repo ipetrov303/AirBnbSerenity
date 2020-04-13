@@ -29,19 +29,21 @@ public class ResultsPageActions extends BaseActions {
     }
 
     @Step
-    public void clicksOnFirstResultWithGradeFiveOrAbove() {
+    public void clicksOnFirstResultWithGradeFiveOrAbove() throws InterruptedException {
         boolean isFound = true;
         while (isFound) {
             for (WebElementFacade webElementFacade : resultsPage.itemsList) {
                 if (webElementFacade.containsElements(GRADE_LOCATOR) &&
                         Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= 5.00) {
                     isFound = false;
+                    Thread.sleep(2000);
                     clicksOn(webElementFacade);
                     break;
                 }
             }
             if (isFound) {
                 clicksOn(resultsPage.nextPageArrowButton);
+
             }
         }
     }
