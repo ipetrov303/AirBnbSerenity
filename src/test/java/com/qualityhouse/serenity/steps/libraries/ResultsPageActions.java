@@ -1,6 +1,7 @@
 package com.qualityhouse.serenity.steps.libraries;
 
 import com.qualityhouse.serenity.entities.VacationDetails;
+import com.qualityhouse.serenity.entities.VacationFilters;
 import com.qualityhouse.serenity.page_objects.ResultsPage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
@@ -15,7 +16,7 @@ public class ResultsPageActions extends BaseActions {
     ResultsPage resultsPage;
 
     @Step
-    public void selectFilters(VacationDetails details) {
+    public void selectFilters(VacationFilters details) {
 
         clicksOn(PRICE_RANGE_BUTTON_LOCATOR);
         fillsFieldWithData(MINIMAL_PRICE_FIELD_LOCATOR, details.getPriceFrom());
@@ -29,12 +30,18 @@ public class ResultsPageActions extends BaseActions {
 
     @Step
     public void clicksOnFirstResultWithGradeFiveOrAbove() {
-
-        for (WebElementFacade webElementFacade : resultsPage.itemsList) {
-            if (webElementFacade.containsElements(GRADE_LOCATOR) &&
-                    Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= 5.00) {
-                clicksOn(webElementFacade);
-                break;
+        boolean isFound = true;
+        while (isFound) {
+            for (WebElementFacade webElementFacade : resultsPage.itemsList) {
+                if (webElementFacade.containsElements(GRADE_LOCATOR) &&
+                        Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= 5.00) {
+                    isFound = false;
+                    clicksOn(webElementFacade);
+                    break;
+                }
+            }
+            if (isFound) {
+                clicksOn(resultsPage.nextPageArrowButton);
             }
         }
     }
