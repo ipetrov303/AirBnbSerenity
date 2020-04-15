@@ -8,7 +8,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -180,6 +179,6 @@ public class BaseActions {
 
     @Step
     public int readsNumberOfPeopleAsInteger(By locator) {
-        return Integer.parseInt(readsTextFrom(locator).substring(0,1));
+        return Integer.parseInt(readsTextFrom(locator).substring(0, 1));
     }
 }
