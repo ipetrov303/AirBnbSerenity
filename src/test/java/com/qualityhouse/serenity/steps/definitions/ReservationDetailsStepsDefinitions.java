@@ -4,10 +4,8 @@ import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.ReservationDetailsPage;
 import com.qualityhouse.serenity.steps.libraries.ReservationDetailsActions;
 import cucumber.api.java.en.Then;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,6 @@ public class ReservationDetailsStepsDefinitions {
 
     @Then("^correct total price and reservation details are displayed$")
     public void correctDetailsAreDisplayed() {
-        WebElementFacade webElementFacade = null;
         String pattern = "(\\d+)";
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher;
@@ -38,10 +35,9 @@ public class ReservationDetailsStepsDefinitions {
         int finalPrice;
         int actualNumberOfPeople;
         int weeklyDiscount;
+        boolean isPresent = reservationDetails.getDriver().findElements(BOOKING_WIDGET_LOCATOR).isEmpty();
 
-
-        assert false;
-        if (webElementFacade.find(BOOKING_WIDGET_LOCATOR).isDisplayed()) {
+        if (!isPresent) {
             taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
             finalPrice = bob.readsPrice(FINAL_PRICE1);
             actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
@@ -82,94 +78,5 @@ public class ReservationDetailsStepsDefinitions {
                 .isEqualTo(expectedTotalPrice);
 
         softly.assertAll();
-
-
-
-        /*try {
-            String pattern = "(\\d+)";
-            Pattern regex = Pattern.compile(pattern);
-            Matcher matcher;
-            List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
-            int taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
-            int finalPrice = bob.readsPrice(FINAL_PRICE1);
-            int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
-            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1));
-            int weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR1).substring(2));
-
-            while (matcher.find()) {
-                valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
-            }
-
-            int pricePerNight = valuesForUnitPriceAndNumberOfDays.get(0);
-            int numberOfNights = valuesForUnitPriceAndNumberOfDays.get(1);
-
-
-            SoftAssertions softly = new SoftAssertions();
-
-            int expectedTotalPrice = ((pricePerNight * numberOfNights) + taxForService) - weeklyDiscount;
-            int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
-                    + HomeStepsDefinitions.vacationDetails.getChildren();
-
-            softly.assertThat(numberOfNights)
-                    .as("Number of nights should be displayed correctly: ")
-                    .isEqualTo(HomeStepsDefinitions.vacationDetails.getPeriodLength());
-
-            softly.assertThat(actualNumberOfPeople)
-                    .as("Number of guests displayed correctly: ")
-                    .isEqualTo(expectedNumberOfGuests);
-
-            softly.assertThat(finalPrice)
-                    .as("Final price should be calculated correctly: ")
-                    .isEqualTo(expectedTotalPrice);
-
-            softly.assertAll();
-
-        } catch (
-                RuntimeException exception) {
-            System.out.println(exception.getMessage());
-        }*/
-
-        /*try {
-            String pattern = "(\\d+)";
-            Pattern regex = Pattern.compile(pattern);
-            Matcher matcher;
-            List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
-            int taxForService = bob.readsPrice(TAX_FOR_SERVICE);
-            int finalPrice = bob.readsPrice(FINAL_PRICE);
-            int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
-            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR));
-            int weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR).substring(2));
-
-            while (matcher.find()) {
-                valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
-            }
-
-            int pricePerNight = valuesForUnitPriceAndNumberOfDays.get(0);
-            int numberOfNights = valuesForUnitPriceAndNumberOfDays.get(1);
-
-
-            SoftAssertions softly = new SoftAssertions();
-
-            int expectedTotalPrice = ((pricePerNight * numberOfNights) + taxForService) - weeklyDiscount;
-            int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
-                    + HomeStepsDefinitions.vacationDetails.getChildren();
-
-            softly.assertThat(numberOfNights)
-                    .as("Number of nights should be displayed correctly: ")
-                    .isEqualTo(HomeStepsDefinitions.vacationDetails.getPeriodLength());
-
-            softly.assertThat(actualNumberOfPeople)
-                    .as("Number of guests displayed correctly: ")
-                    .isEqualTo(expectedNumberOfGuests);
-
-            softly.assertThat(finalPrice)
-                    .as("Final price should be calculated correctly: ")
-                    .isEqualTo(expectedTotalPrice);
-
-            softly.assertAll();
-        } catch (RuntimeException exception) {
-            System.out.println(exception.getMessage());
-            System.out.println("peach");
-        }*/
     }
 }

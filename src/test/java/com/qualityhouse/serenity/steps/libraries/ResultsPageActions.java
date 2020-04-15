@@ -1,6 +1,5 @@
 package com.qualityhouse.serenity.steps.libraries;
 
-import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.entities.VacationFilters;
 import com.qualityhouse.serenity.page_objects.ResultsPage;
 import net.serenitybdd.core.pages.WebElementFacade;

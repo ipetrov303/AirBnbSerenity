@@ -1,11 +1,7 @@
 package com.qualityhouse.serenity.page_objects;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
-import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
-
-import java.util.List;
 
 public class ReservationDetailsPage extends PageObject {
 
@@ -23,13 +19,4 @@ public class ReservationDetailsPage extends PageObject {
     public static final By WEEKLY_DISCOUNT_FIELD_LOCATOR1 = By.cssSelector("[class='_l1ngr4']");
 
     public static final By BOOKING_WIDGET_LOCATOR = By.cssSelector("[data-plugin-in-point-id='BOOK_IT_SIDEBAR']");
-
-    @FindBy(css = "[class='_hgs47m'] [class='_1jlnvra2'] span")
-    public WebElementFacade priceMultiplyNightsText;
-
-    @FindBy(css = "[class='_l1ngr4']")
-    public WebElementFacade weeklyDiscountField;
-
-    @FindBy(css = "[class='_1jlnvra2'] [class='_j1kt73']")
-    public List<WebElementFacade> priceList;
 }
