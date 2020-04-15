@@ -22,6 +22,8 @@ public class ReservationDetailsPage extends PageObject {
     public static final By PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1 = By.cssSelector("[class='_8zqgja']");
     public static final By WEEKLY_DISCOUNT_FIELD_LOCATOR1 = By.cssSelector("[class='_l1ngr4']");
 
+    public static final By BOOKING_WIDGET_LOCATOR = By.cssSelector("[data-plugin-in-point-id='BOOK_IT_SIDEBAR']");
+
     @FindBy(css = "[class='_hgs47m'] [class='_1jlnvra2'] span")
     public WebElementFacade priceMultiplyNightsText;
 
