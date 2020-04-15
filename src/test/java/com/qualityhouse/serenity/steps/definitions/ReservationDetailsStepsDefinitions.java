@@ -26,35 +26,17 @@ public class ReservationDetailsStepsDefinitions {
 
     @Then("^correct total price and reservation details are displayed$")
     public void correctDetailsAreDisplayed() {
-        String pattern = "(\\d+)";
+        /*String pattern = "(\\d+)";
         Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher("test");
+        Matcher matcher;
         List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
 
-        int taxForService = 0;
-        int finalPrice = 0;
-        int actualNumberOfPeople = 0;
-        int weeklyDiscount = 0;
+        int taxForService = bob.readsPriceForTaxService();
+        int finalPrice = bob.readsFinalPrice();
+        int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger();
+        matcher = regex.matcher(bob.readsTextFrom());
+        int weeklyDiscount = bob.readsWeeklyDiscount();
 
-        /*try {
-            taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
-            finalPrice = bob.readsPrice(TOTAL_PRICE1);
-            actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
-            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1));
-            weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR1).substring(2));
-        } catch (RuntimeException exception) {
-            System.out.println(exception.getMessage());
-        }
-        try {*/
-            taxForService = bob.readsPrice(TAX_FOR_SERVICE);
-            finalPrice = bob.readsPrice(TOTAL_PRICE);
-            actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
-            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR));
-            weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR).substring(2));
-        /*} catch (RuntimeException exception) {
-            System.out.println(exception.getMessage());
-        }*/
-        System.out.println();
         while (matcher.find()) {
             valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
         }
@@ -81,6 +63,94 @@ public class ReservationDetailsStepsDefinitions {
                 .as("Final price should be calculated correctly: ")
                 .isEqualTo(expectedTotalPrice);
 
-        softly.assertAll();
+        softly.assertAll();*/
+
+
+        try {
+            String pattern = "(\\d+)";
+            Pattern regex = Pattern.compile(pattern);
+            Matcher matcher;
+            List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
+            int taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
+            int finalPrice = bob.readsPrice(FINAL_PRICE1);
+            int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
+            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1));
+            int weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR1).substring(2));
+
+            while (matcher.find()) {
+                valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
+            }
+
+            int pricePerNight = valuesForUnitPriceAndNumberOfDays.get(0);
+            int numberOfNights = valuesForUnitPriceAndNumberOfDays.get(1);
+
+
+            SoftAssertions softly = new SoftAssertions();
+
+            int expectedTotalPrice = ((pricePerNight * numberOfNights) + taxForService) - weeklyDiscount;
+            int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
+                    + HomeStepsDefinitions.vacationDetails.getChildren();
+
+            softly.assertThat(numberOfNights)
+                    .as("Number of nights should be displayed correctly: ")
+                    .isEqualTo(HomeStepsDefinitions.vacationDetails.getPeriodLength());
+
+            softly.assertThat(actualNumberOfPeople)
+                    .as("Number of guests displayed correctly: ")
+                    .isEqualTo(expectedNumberOfGuests);
+
+            softly.assertThat(finalPrice)
+                    .as("Final price should be calculated correctly: ")
+                    .isEqualTo(expectedTotalPrice);
+
+            softly.assertAll();
+
+        } catch (
+                RuntimeException exception) {
+            System.out.println(exception.getMessage());
+        }
+
+        try {
+            String pattern = "(\\d+)";
+            Pattern regex = Pattern.compile(pattern);
+            Matcher matcher;
+            List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
+            int taxForService = bob.readsPrice(TAX_FOR_SERVICE);
+            int finalPrice = bob.readsPrice(FINAL_PRICE);
+            int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
+            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR));
+            int weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR).substring(2));
+
+            while (matcher.find()) {
+                valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
+            }
+
+            int pricePerNight = valuesForUnitPriceAndNumberOfDays.get(0);
+            int numberOfNights = valuesForUnitPriceAndNumberOfDays.get(1);
+
+
+            SoftAssertions softly = new SoftAssertions();
+
+            int expectedTotalPrice = ((pricePerNight * numberOfNights) + taxForService) - weeklyDiscount;
+            int expectedNumberOfGuests = HomeStepsDefinitions.vacationDetails.getAdults()
+                    + HomeStepsDefinitions.vacationDetails.getChildren();
+
+            softly.assertThat(numberOfNights)
+                    .as("Number of nights should be displayed correctly: ")
+                    .isEqualTo(HomeStepsDefinitions.vacationDetails.getPeriodLength());
+
+            softly.assertThat(actualNumberOfPeople)
+                    .as("Number of guests displayed correctly: ")
+                    .isEqualTo(expectedNumberOfGuests);
+
+            softly.assertThat(finalPrice)
+                    .as("Final price should be calculated correctly: ")
+                    .isEqualTo(expectedTotalPrice);
+
+            softly.assertAll();
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+            System.out.println("peach");
+        }
     }
 }

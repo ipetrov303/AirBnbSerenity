@@ -1,5 +1,6 @@
 Feature: Place Reservation
 
+  @Debug
   Scenario: Place Reservation with Correct Details
     Given Bob is on the home page and chooses Euro as his currency
     When he submits a search for the desired destination with his details:
