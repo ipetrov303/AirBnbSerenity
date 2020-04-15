@@ -43,7 +43,6 @@ public class ResultsPageActions extends BaseActions {
             }
             if (isFound) {
                 clicksOn(resultsPage.nextPageArrowButton);
-
             }
         }
     }

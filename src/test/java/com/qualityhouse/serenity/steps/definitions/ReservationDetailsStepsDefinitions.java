@@ -4,8 +4,10 @@ import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.page_objects.ReservationDetailsPage;
 import com.qualityhouse.serenity.steps.libraries.ReservationDetailsActions;
 import cucumber.api.java.en.Then;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +28,32 @@ public class ReservationDetailsStepsDefinitions {
 
     @Then("^correct total price and reservation details are displayed$")
     public void correctDetailsAreDisplayed() {
-        /*String pattern = "(\\d+)";
+        WebElementFacade webElementFacade = null;
+        String pattern = "(\\d+)";
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher;
         List<Integer> valuesForUnitPriceAndNumberOfDays = new ArrayList<>();
 
-        int taxForService = bob.readsPriceForTaxService();
-        int finalPrice = bob.readsFinalPrice();
-        int actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger();
-        matcher = regex.matcher(bob.readsTextFrom());
-        int weeklyDiscount = bob.readsWeeklyDiscount();
+        int taxForService;
+        int finalPrice;
+        int actualNumberOfPeople;
+        int weeklyDiscount;
+
+
+        assert false;
+        if (webElementFacade.find(BOOKING_WIDGET_LOCATOR).isDisplayed()) {
+            taxForService = bob.readsPrice(TAX_FOR_SERVICE1);
+            finalPrice = bob.readsPrice(FINAL_PRICE1);
+            actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE1);
+            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1));
+            weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR1).substring(2));
+        } else {
+            taxForService = bob.readsPrice(TAX_FOR_SERVICE);
+            finalPrice = bob.readsPrice(FINAL_PRICE);
+            actualNumberOfPeople = bob.readsNumberOfPeopleAsInteger(NUMBER_OF_PEOPLE);
+            matcher = regex.matcher(bob.readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR));
+            weeklyDiscount = Integer.parseInt(bob.readsTextFrom(WEEKLY_DISCOUNT_FIELD_LOCATOR).substring(2));
+        }
 
         while (matcher.find()) {
             valuesForUnitPriceAndNumberOfDays.add(Integer.parseInt(matcher.group() + ""));
@@ -63,10 +81,11 @@ public class ReservationDetailsStepsDefinitions {
                 .as("Final price should be calculated correctly: ")
                 .isEqualTo(expectedTotalPrice);
 
-        softly.assertAll();*/
+        softly.assertAll();
 
 
-        try {
+
+        /*try {
             String pattern = "(\\d+)";
             Pattern regex = Pattern.compile(pattern);
             Matcher matcher;
@@ -108,9 +127,9 @@ public class ReservationDetailsStepsDefinitions {
         } catch (
                 RuntimeException exception) {
             System.out.println(exception.getMessage());
-        }
+        }*/
 
-        try {
+        /*try {
             String pattern = "(\\d+)";
             Pattern regex = Pattern.compile(pattern);
             Matcher matcher;
@@ -151,6 +170,6 @@ public class ReservationDetailsStepsDefinitions {
         } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
             System.out.println("peach");
-        }
+        }*/
     }
 }
