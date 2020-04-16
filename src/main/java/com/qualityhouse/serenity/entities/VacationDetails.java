@@ -9,6 +9,7 @@ public class VacationDetails {
     private int periodLength;
     private int adults;
     private int children;
+    private int finalPrice;
 
 
     public String getDestination() {
@@ -57,6 +58,18 @@ public class VacationDetails {
 
     public void setChildren(int children) {
         this.children = children;
+    }
+
+    public int getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(int finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public int getAllNumberOfPersons(){
+        return this.getAdults() + this.getChildren();
     }
 
 }

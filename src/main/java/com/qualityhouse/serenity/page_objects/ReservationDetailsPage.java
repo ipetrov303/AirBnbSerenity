@@ -11,7 +11,6 @@ public class ReservationDetailsPage extends PageObject {
     public static final By PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR = By.cssSelector("[class='_hgs47m'] [class='_1jlnvra2'] span");
     public static final By WEEKLY_DISCOUNT_FIELD_LOCATOR = By.cssSelector("#book_it_form > div:nth-child(3) > div:nth-child(2) > div._hgs47m > div._ni9axhe > span > span > div");
 
-
     public static final By TAX_FOR_SERVICE1 = By.cssSelector("[class='_adhikmk'] [class='_ra05uc']");
     public static final By FINAL_PRICE1 = By.cssSelector("[class='_1d3ext9m']");
     public static final By NUMBER_OF_PEOPLE1 = By.cssSelector("[class = '_1ir6ymk'] span");
