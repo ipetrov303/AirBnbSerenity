@@ -2,29 +2,35 @@ package com.qualityhouse.serenity.steps.definitions;
 
 import com.qualityhouse.serenity.entities.VacationDetails;
 import com.qualityhouse.serenity.steps.libraries.HomeActions;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class HomeStepsDefinitions {
     static VacationDetails vacationDetails;
     @Steps
     private HomeActions bob;
 
-    @Given("^(?:.*) is on the home page and chooses Euro as his currency$")
+    @Given("^(?:.*) is on the home page$")
     public void isOnTheHomePage() {
         bob.opensHomePage();
-        bob.selectsCurrency();
+
     }
 
-    @When("^he submits a search for the desired destination with his details:$")
+    @When("^he searches for booking options with preferences:$")
     public void heSubmitsASearchForTheDesiredDestinationWithHisDetails(List<VacationDetails> data) throws InterruptedException {
 
         vacationDetails = data.get(0);
-        bob.submitVacationDetails(vacationDetails);
+        bob.searchesForVacationOptions(vacationDetails);
     }
+
+    @Before("@eur_currency")
+    public void initEURCurrency() {
+        bob.opensHomePage();
+        bob.selectsEURCurrency();
+    }
+
 }

@@ -18,14 +18,14 @@ public class HomeActions extends BaseActions {
     }
 
     @Step
-    public void selectsCurrency() {
+    public void selectsEURCurrency() {
         clicksOn(homePage.regionAndCurrencyButton);
         clicksOn(homePage.currencyLinkText.get(1));
         clicksOn(homePage.currencyOptions.get(4));
     }
 
     @Step
-    public void submitVacationDetails(VacationDetails vacationDetails) throws InterruptedException {
+    public void searchesForVacationOptions(VacationDetails vacationDetails) throws InterruptedException {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
         Thread.sleep(1000);
         selectOptionFromDestinationResults(0);
