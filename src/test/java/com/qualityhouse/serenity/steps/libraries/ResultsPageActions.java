@@ -15,7 +15,7 @@ public class ResultsPageActions extends BaseActions {
     ResultsPage resultsPage;
 
     @Step
-    public void selectFilters(VacationFilters details) {
+    public void filtersBy(VacationFilters details) {
 
         clicksOn(PRICE_RANGE_BUTTON_LOCATOR);
         fillsFieldWithData(MINIMAL_PRICE_FIELD_LOCATOR, details.getPriceFrom());
@@ -25,22 +25,24 @@ public class ResultsPageActions extends BaseActions {
         clicksOnIncreaseButton(details.getBathrooms(), resultsPage.addBathroomButton);
         clicksMultipleOptions(Arrays.asList(details.getExtras().split(", ")));
         clicksOn(resultsPage.submitFiltersButton);
+        resultsPage.waitForRenderedElementsToDisappear(EMPTY_OTHER_FILTERS_LOCATOR);
     }
 
     @Step
-    public void clicksOnFirstResultWithGradeFiveOrAbove() throws InterruptedException {
-        boolean isFound = true;
-        while (isFound) {
+    public void clicksOnFirstResultWithRateEqualOrAbove(double rating) {
+        boolean isFound = false;
+        while (!isFound)
+        {
             for (WebElementFacade webElementFacade : resultsPage.itemsList) {
                 if (webElementFacade.containsElements(GRADE_LOCATOR) &&
-                        Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= 5.00) {
-                    isFound = false;
-                    Thread.sleep(2000);
+                        Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= rating ) {
+                    isFound = true;
                     clicksOn(webElementFacade);
                     break;
                 }
             }
-            if (isFound) {
+
+            if (!isFound) {
                 clicksOn(resultsPage.nextPageArrowButton);
             }
         }
