@@ -23,6 +23,7 @@ public class ResultsPageStepsDefinitions {
         bob.selectFilters(vacationFilters);
         Thread.sleep(1000);
         bob.clicksOnFirstResultWithGradeFiveOrAbove();
+        Thread.sleep(1000);
         bob.switchToNewTab(1);
     }
 }

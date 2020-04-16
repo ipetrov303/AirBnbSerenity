@@ -169,16 +169,16 @@ public class BaseActions {
 
     @Step
     public int readsPrice(By locator) {
-        return Integer.parseInt(readsTextFrom(locator).substring(1));
+        return Integer.parseInt(readsTextFrom(locator).replaceAll("[^0-9]+", ""));
     }
 
     @Step
     public int readsPrice(WebElementFacade webElement) {
-        return Integer.parseInt(readsTextFrom(webElement).substring(1));
+        return Integer.parseInt(readsTextFrom(webElement).replaceAll("[^0-9]+", ""));
     }
 
     @Step
     public int readsNumberOfPeopleAsInteger(By locator) {
-        return Integer.parseInt(readsTextFrom(locator).substring(0, 1));
+        return Integer.parseInt(readsTextFrom(locator).trim().substring(0, 1));
     }
 }
