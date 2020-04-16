@@ -27,7 +27,7 @@ public class ReservationDetailsStepsDefinitions {
 
         softly.assertThat(bob.getActualNumberOfPeople())
                 .as("Number of guests displayed correctly: ")
-                .isEqualTo(vacationDetails.getAllNumberOfPersons());
+                .isEqualTo(HomeStepsDefinitions.vacationDetails.getAllNumberOfPersons());
 
         softly.assertThat(bob.getActualTotalPrice())
                 .as("Final price should be calculated correctly: ")
