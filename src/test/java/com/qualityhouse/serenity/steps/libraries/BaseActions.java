@@ -129,29 +129,36 @@ public class BaseActions {
     }
 
     @Step
-    public void switchToNewTab(int tabIndex) {
-
+    public void switchesToOfferTab()  {
         this.mainWindow = currentPage.getDriver()
                 .getWindowHandle();
 
+        waitForTheSecondTab();
+
         Set<String> windowsHandles = currentPage.getDriver()
                 .getWindowHandles();
-        if (windowsHandles == null || windowsHandles.size() < tabIndex + 1) {
-            throw new RuntimeException("Cannot switch to tab because there aren't any!");
-        }
 
-        Iterator<String> iterate = windowsHandles.iterator();
-        String tabToSwitch = null;
-
-        for (int i = 0; i <= tabIndex; i++) {
-            tabToSwitch = iterate.next();
-        }
-
-        if (tabToSwitch == null) {
-            throw new RuntimeException("Unable to find tab to switch to!");
-        }
+        String tabToSwitch = windowsHandles.toArray()[1].toString();
 
         currentPage.getDriver().switchTo().window(tabToSwitch);
+    }
+
+    private void waitForTheSecondTab() {
+        int attempt = 0;
+        while (currentPage.getDriver().getWindowHandles().size() < 2)
+        {
+            attempt++;
+
+            if (attempt > 100) {
+                throw new RuntimeException("Cannot switch to tab because there aren't any!");
+            }
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Step

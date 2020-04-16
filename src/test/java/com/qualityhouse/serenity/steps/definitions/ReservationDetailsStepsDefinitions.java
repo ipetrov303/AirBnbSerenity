@@ -18,13 +18,11 @@ public class ReservationDetailsStepsDefinitions {
 
     @Steps
     private ReservationDetailsActions bob;
-    @Steps
     private ReservationDetailsPage reservationDetails;
-    @Steps
     private VacationDetails vacationDetails;
 
 
-    @Then("^correct total price and reservation details are displayed$")
+    @Then("^the booking details are displayed correctly$")
     public void correctDetailsAreDisplayed() {
         String pattern = "(\\d+)";
         Pattern regex = Pattern.compile(pattern);
