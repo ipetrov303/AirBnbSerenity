@@ -7,8 +7,6 @@ import cucumber.api.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.SoftAssertions;
 
-import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.*;
-
 public class ReservationDetailsStepsDefinitions {
 
     @Steps
@@ -31,7 +29,7 @@ public class ReservationDetailsStepsDefinitions {
 
         softly.assertThat(bob.getActualTotalPrice())
                 .as("Final price should be calculated correctly: ")
-                .isEqualTo(bob.getExpectedTotalPrice(vacationDetails));
+                .isEqualTo(HomeStepsDefinitions.vacationDetails.getFinalPrice());
 
         softly.assertAll();
     }
