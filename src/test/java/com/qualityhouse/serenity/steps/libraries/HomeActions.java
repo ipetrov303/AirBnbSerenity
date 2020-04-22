@@ -5,13 +5,17 @@ import com.qualityhouse.serenity.page_objects.HomePage;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static com.qualityhouse.serenity.page_objects.HomePage.DESTINATION_FIELD;
 import static com.qualityhouse.serenity.page_objects.HomePage.DESTINATION_SEARCH_OPTIONS;
 
 public class HomeActions extends BaseActions {
 
     private HomePage homePage;
-    String string = "String";
+
     @Step
     public void opensHomePage() {
         homePage.open();
@@ -28,7 +32,7 @@ public class HomeActions extends BaseActions {
     public void searchesForVacationOptions(VacationDetails vacationDetails) throws InterruptedException {
         fillsFieldWithData(DESTINATION_FIELD, vacationDetails.getDestination());
         Thread.sleep(1000);
-        selectOptionFromDestinationResults(0);
+        selectOptionFromDestinationResults();
         selectCheckInDate(vacationDetails.getDaysFromNow());
         selectCheckOutDate(vacationDetails.getDaysFromNow(), vacationDetails.getPeriodLength());
         clicksOn(homePage.searchBarList.get(2));
@@ -40,10 +44,32 @@ public class HomeActions extends BaseActions {
 
 
     @Step
-    private void selectOptionFromDestinationResults(int searchResults) {
+    private void selectOptionFromDestinationResults() {
         clicksOn((WebElementFacade) homePage.destinationOptionsDropDown
-                .get(searchResults).find(DESTINATION_SEARCH_OPTIONS));
+                .get(0).find(DESTINATION_SEARCH_OPTIONS));
     }
 
 
+    public void setStartDate(VacationDetails vacationDetails) {
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, vacationDetails.getDaysFromNow());
+        date = calendar.getTime();
+
+        vacationDetails.setStartDate(formatDate(date));
+    }
+
+
+    public void setEndDate(VacationDetails vacationDetails) {
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, vacationDetails.getDaysFromNow() + vacationDetails.getPeriodLength());
+        date = calendar.getTime();
+
+        vacationDetails.setEndDate(formatDate(date));
+    }
 }

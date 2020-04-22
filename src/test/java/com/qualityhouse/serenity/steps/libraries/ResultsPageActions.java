@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 
 import java.util.Arrays;
 
+import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.BOOKING_WIDGET_LOCATOR;
 import static com.qualityhouse.serenity.page_objects.ResultsPage.*;
 
 
@@ -31,20 +32,46 @@ public class ResultsPageActions extends BaseActions {
     @Step
     public void clicksOnFirstResultWithRateEqualOrAbove(double rating) {
         boolean isFound = false;
-        while (!isFound)
-        {
-            for (WebElementFacade webElementFacade : resultsPage.itemsList) {
-                if (webElementFacade.containsElements(GRADE_LOCATOR) &&
-                        Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= rating ) {
-                    isFound = true;
-                    clicksOn(webElementFacade);
-                    break;
+        if (isSiteVersionOneLoaded(GRADE_LOCATOR)) {
+            while (!isFound)
+            {
+                for (WebElementFacade webElementFacade : resultsPage.itemsList) {
+                    if (webElementFacade.containsElements(GRADE_LOCATOR) &&
+                            Double.parseDouble(webElementFacade.find(GRADE_LOCATOR).getText()) >= rating ) {
+                        isFound = true;
+                        clicksOn(webElementFacade);
+                        break;
+                    }
+                }
+
+                if (!isFound) {
+                    clicksOn(resultsPage.nextPageArrowButton);
                 }
             }
+        } else {
+            while (!isFound)
+            {
+                for (WebElementFacade webElementFacade : resultsPage.itemsList) {
+                    if (webElementFacade.containsElements(GRADE_LOCATOR1) &&
+                            Double.parseDouble(webElementFacade.find(GRADE_LOCATOR1).getText()) >= rating ) {
+                        isFound = true;
+                        clicksOn(webElementFacade);
+                        break;
+                    }
+                }
 
-            if (!isFound) {
-                clicksOn(resultsPage.nextPageArrowButton);
+                if (!isFound) {
+                    clicksOn(resultsPage.nextPageArrowButton);
+                }
             }
+        }
+    }
+
+    public int getFinalPrice() {
+        if (isSiteVersionOneLoaded(GRADE_LOCATOR)) {
+            return readsPrice(FINAL_PRICE_LOCATOR);
+        } else {
+            return readsPrice(FINAL_PRICE_LOCATOR1);
         }
     }
 }

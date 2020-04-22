@@ -1,6 +1,6 @@
 package com.qualityhouse.serenity.steps.libraries;
 
-import com.qualityhouse.serenity.entities.VacationDetails;
+
 import com.qualityhouse.serenity.page_objects.BasePage;
 import com.qualityhouse.serenity.page_objects.HomePage;
 import com.qualityhouse.serenity.page_objects.utils.ExtrasEnum;
@@ -10,14 +10,15 @@ import org.openqa.selenium.By;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.BOOKING_WIDGET_LOCATOR;
 
 public class BaseActions {
 
     private HomePage homePage;
     private BasePage currentPage;
-    private VacationDetails vacationDetails;
-    private String mainWindow;
 
     @Step
     protected void clicksOn(WebElementFacade buttonOrLink) {
@@ -129,8 +130,8 @@ public class BaseActions {
     }
 
     @Step
-    public void switchesToOfferTab()  {
-        this.mainWindow = currentPage.getDriver()
+    public void switchesToOfferTab() {
+        String mainWindow = currentPage.getDriver()
                 .getWindowHandle();
 
         waitForTheSecondTab();
@@ -145,8 +146,7 @@ public class BaseActions {
 
     private void waitForTheSecondTab() {
         int attempt = 0;
-        while (currentPage.getDriver().getWindowHandles().size() < 2)
-        {
+        while (currentPage.getDriver().getWindowHandles().size() < 2) {
             attempt++;
 
             if (attempt > 100) {
@@ -188,4 +188,24 @@ public class BaseActions {
     public int readsNumberOfPeopleAsInteger(By locator) {
         return Integer.parseInt(readsTextFrom(locator).trim().substring(0, 1));
     }
+
+    public String formatDate(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        return format.format(date);
+    }
+
+    public String formatDate(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        return format.format(date);
+    }
+
+    public String readsValue(By locator) {
+        return currentPage.find(locator).getValue().trim();
+    }
+
+
+    public boolean isSiteVersionOneLoaded(By locator) {
+        return !currentPage.findAll(locator).isEmpty();
+    }
+
 }

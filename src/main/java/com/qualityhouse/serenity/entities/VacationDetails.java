@@ -10,7 +10,8 @@ public class VacationDetails {
     private int adults;
     private int children;
     private int finalPrice;
-
+    private String startDate;
+    private String endDate;
 
     public String getDestination() {
         return destination;
@@ -66,6 +67,22 @@ public class VacationDetails {
 
     public void setFinalPrice(int finalPrice) {
         this.finalPrice = finalPrice;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public int getAllNumberOfPersons(){
