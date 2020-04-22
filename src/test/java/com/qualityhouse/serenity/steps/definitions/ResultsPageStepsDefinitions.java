@@ -9,7 +9,9 @@ import net.thucydides.core.annotations.Steps;
 
 import java.util.List;
 
-import static com.qualityhouse.serenity.page_objects.ResultsPage.FINAL_PRICE_LOCATOR;
+import static com.qualityhouse.serenity.page_objects.BasePage.vacationDetails;
+
+
 
 public class ResultsPageStepsDefinitions {
     @Steps
@@ -23,7 +25,7 @@ public class ResultsPageStepsDefinitions {
 
         bob.filtersBy(vacationFilters);
         bob.clicksOnFirstResultWithRateEqualOrAbove(rating);
-        HomeStepsDefinitions.vacationDetails.setFinalPrice(bob.readsPrice(FINAL_PRICE_LOCATOR));
+        vacationDetails.setFinalPrice(bob.getFinalPrice());
         bob.switchesToOfferTab();
     }
 }

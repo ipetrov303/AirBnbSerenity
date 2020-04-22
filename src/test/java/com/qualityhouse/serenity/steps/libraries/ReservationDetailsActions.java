@@ -12,6 +12,7 @@ import static com.qualityhouse.serenity.page_objects.ReservationDetailsPage.*;
 
 
 public class ReservationDetailsActions extends BaseActions {
+
     private ReservationDetailsPage currentPage;
 
     @Step
@@ -19,19 +20,16 @@ public class ReservationDetailsActions extends BaseActions {
         return Integer.parseInt(readsTextFrom(locator).trim().substring(0, 1));
     }
 
-    @Step
+
     public int getActualTotalPrice() {
-        if (hasVersion1()) {
-            return readsPrice(FINAL_PRICE1);
-        } else {
-            return readsPrice(FINAL_PRICE);
-        }
+        return isSiteVersionOneLoaded(BOOKING_WIDGET_LOCATOR) ?
+               readsPrice(FINAL_PRICE1_LOCATOR1) :
+               readsPrice(FINAL_PRICE_LOCATOR);
     }
 
-    @Step
     public int getActualNumberOfNights() {
         List<String> data;
-        if (hasVersion1()) {
+        if (isSiteVersionOneLoaded(BOOKING_WIDGET_LOCATOR)) {
             data = Arrays.stream(readsTextFrom(PRICE_MULTIPLY_NIGHTS_TEXT_LOCATOR1)
                     .split(" "))
                     .collect(Collectors.toList());
@@ -43,16 +41,23 @@ public class ReservationDetailsActions extends BaseActions {
         return Integer.parseInt(data.get(data.size() - 2));
     }
 
-    @Step
+
     public int getActualNumberOfPeople() {
-        if (hasVersion1()) {
-            return readsPrice(NUMBER_OF_PEOPLE1);
-        } else {
-            return readsPrice(NUMBER_OF_PEOPLE);
-        }
+        return isSiteVersionOneLoaded(BOOKING_WIDGET_LOCATOR) ?
+               readsPrice(NUMBER_OF_PEOPLE1) :
+               readsPrice(NUMBER_OF_PEOPLE);
     }
 
-    private boolean hasVersion1() {
-        return !currentPage.findAll(BOOKING_WIDGET_LOCATOR).isEmpty();
+
+    public String getStartDate() {
+        return isSiteVersionOneLoaded(BOOKING_WIDGET_LOCATOR) ?
+               readsTextFrom(START_DATE_LOCATOR1).trim() :
+               formatDate(readsValue(START_DATE_LOCATOR));
+    }
+
+    public String getEndDate() {
+        return isSiteVersionOneLoaded(BOOKING_WIDGET_LOCATOR) ?
+               readsTextFrom(END_DATE_LOCATOR1).trim() :
+               formatDate(readsValue(END_DATE_LOCATOR));
     }
 }

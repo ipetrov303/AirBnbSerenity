@@ -14,8 +14,10 @@ public class ResultsPage extends BasePage {
     public static final By MAXIMAL_PRICE_FIELD_LOCATOR = By.id("price_filter_max");
     public static final By PRICE_FILTER_SAVE_BUTTON = By.id("filter-panel-save-button");
     public static final By GRADE_LOCATOR = By.cssSelector("[class='_3zgr580']");
+    public static final By GRADE_LOCATOR1 = By.cssSelector("[class='_1bbeetd'] [class='_10fy1f8']");
     public static final By EMPTY_OTHER_FILTERS_LOCATOR = By.cssSelector("[aria-label='Още филтри, 0 филтъра са приложени']");
     public static final By FINAL_PRICE_LOCATOR = By.cssSelector("[class='_1llb8an']");
+    public static final By FINAL_PRICE_LOCATOR1 = By.cssSelector("[class='_ebe4pze']");
 
 
     @FindBy(css = "[id='filterItem-stepper-min_bathrooms-0'] [aria-label='увеличаване на стойността']")
